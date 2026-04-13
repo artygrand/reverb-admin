@@ -92,7 +92,7 @@ services:
             - 'host.docker.internal:host-gateway'
         ports:
             - '${REVERB_PORT:-8080}:8080'
-        command: 'php artisan reverb:start'
+        command: 'php artisan reverb:start --debug'
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1

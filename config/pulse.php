@@ -142,6 +142,7 @@ return [
             'sample_rate' => env('PULSE_CACHE_INTERACTIONS_SAMPLE_RATE', 1),
             'ignore' => [
                 ...Pulse::defaultVendorCacheKeys(),
+                '/^livewire-checksum-failures:/', // Livewire rate-limit check on every poll — noise
             ],
             'groups' => [
                 '/^job-exceptions:.*/' => 'job-exceptions:*',

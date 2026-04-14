@@ -4,18 +4,18 @@ import { FileText, Ghost, Radio, Zap } from 'lucide-react';
 import Pusher from 'pusher-js';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type React from 'react';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import apps from '@/routes/applications';
-import broadcasting from '@/routes/applications/broadcasting';
-import type { ReverbAppDetail } from '@/types';
 import AppInfoTab from './components/app-info-tab';
 import DebugControls from './components/debug-controls';
 import type { DebugEntry } from './components/debug-entry';
 import EventCreatorCard from './components/event-creator-card';
 import EventLogEntry from './components/event-log-entry';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import AppLayout from '@/layouts/app-layout';
+import { dashboard } from '@/routes';
+import projects from '@/routes/projects';
+import broadcasting from '@/routes/projects/broadcasting';
+import type { ReverbAppDetail } from '@/types';
 
 
 interface Props {
@@ -94,7 +94,7 @@ export default function AppShow({ app }: Props) {
     const sendEvent = () => {
         setSending(true);
         router.post(
-            apps.debug(app.id).url,
+            projects.debug(app.id).url,
             { channel, event: eventName, data },
             {
                 preserveScroll: true,
@@ -118,7 +118,7 @@ export default function AppShow({ app }: Props) {
                         </p>
                     </div>
                     <Button variant="outline" asChild>
-                        <Link href={apps.logs(app.id).url}>
+                        <Link href={projects.logs(app.id).url}>
                             <FileText className="h-4 w-4" /> Logs
                         </Link>
                     </Button>
@@ -190,7 +190,7 @@ AppShow.layout = (page: React.ReactElement) => {
         <AppLayout
             breadcrumbs={[
                 { title: 'Health Check', href: dashboard() },
-                { title: app?.name ?? 'App', href: apps.show(app?.id ?? 0).url },
+                { title: app?.name ?? 'App', href: projects.show(app?.id ?? 0).url },
             ]}
         >
             {page}

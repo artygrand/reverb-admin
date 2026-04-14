@@ -15,8 +15,8 @@ Route::inertia('/', 'welcome', [
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
 
-    Route::prefix('applications')
-        ->name('applications.')
+    Route::prefix('projects')
+        ->name('projects.')
         ->group(function () {
             Route::get('{app}', [AppController::class, 'show'])->name('show');
             Route::post('{app}/debug', [AppDebugController::class, 'store'])->name('debug');

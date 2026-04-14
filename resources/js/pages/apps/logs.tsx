@@ -9,7 +9,7 @@ import ToggleSwitch from '@/components/ui/toggle-switch';
 import AppLayout from '@/layouts/app-layout';
 import LogTable from '@/pages/apps/components/log-table';
 import { dashboard } from '@/routes';
-import apps from '@/routes/applications';
+import projects from '@/routes/projects';
 import type { ReverbLog } from '@/types';
 
 interface AppLogSettings {
@@ -45,13 +45,13 @@ export default function AppLogs({ app, logs }: Props) {
     const updateSetting = (key: keyof typeof settings, value: boolean) => {
         const next = { ...settings, [key]: value };
         setSettings(next);
-        router.patch(apps.logs.settings(app.id).url, next, {
+        router.patch(projects.logs.settings(app.id).url, next, {
             preserveScroll: true,
         });
     };
 
     const clearLogs = (type?: string) => {
-        router.delete(apps.logs.destroy(app.id).url, {
+        router.delete(projects.logs.destroy(app.id).url, {
             data: type ? { type } : {},
             preserveScroll: true,
         });
@@ -76,7 +76,7 @@ export default function AppLogs({ app, logs }: Props) {
                         </p>
                     </div>
                     <Button variant="outline" asChild>
-                        <Link href={apps.show(app.id).url}>
+                        <Link href={projects.show(app.id).url}>
                             ← Debug Console
                         </Link>
                     </Button>
@@ -186,9 +186,9 @@ AppLogs.layout = (page: React.ReactElement) => {
                 { title: 'Health Check', href: dashboard() },
                 {
                     title: app?.name ?? 'App',
-                    href: apps.show(app?.id ?? 0).url,
+                    href: projects.show(app?.id ?? 0).url,
                 },
-                { title: 'Logs', href: apps.logs(app?.id ?? 0).url },
+                { title: 'Logs', href: projects.logs(app?.id ?? 0).url },
             ]}
         >
             {page}

@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/sidebar';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { dashboard, pulse } from '@/routes';
-import apps from '@/routes/applications';
+import projects from '@/routes/projects';
 import type { NavItem, ReverbAppSummary, SharedProps } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -70,10 +70,10 @@ export function AppSidebar() {
                                 <SidebarMenuItem key={app.id}>
                                     <SidebarMenuButton
                                         asChild
-                                        isActive={isCurrentOrParentUrl(apps.show(app.id).url)}
+                                        isActive={isCurrentOrParentUrl(projects.show(app.id).url)}
                                         tooltip={{ children: app.name }}
                                     >
-                                        <Link href={apps.show(app.id).url} prefetch>
+                                        <Link href={projects.show(app.id).url} prefetch>
                                             <Radio className="h-4 w-4" />
                                             <span>{app.name}</span>
                                         </Link>

@@ -8,6 +8,10 @@ class DBConfig
 {
     public function merge(array $original): array
     {
+       if (!$this->databaseAvailable()) {
+           return $original;
+       }
+
         return array_merge(
             $original,
             ReverbApp::all()->map(fn (ReverbApp $app) => $this->convert($app))->toArray()
@@ -39,5 +43,15 @@ class DBConfig
                 'terminate_on_limit' => $app->rate_limit_terminate,
             ],
         ];
+    }
+
+    private function databaseAvailable(): bool
+    {
+        try {
+            \DB::connection()->getPdo();
+            return \Schema::hasTable('reverb_apps');
+        } catch (\Throwable) {
+            return false;
+        }
     }
 }

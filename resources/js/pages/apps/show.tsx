@@ -46,6 +46,7 @@ export default function AppShow({ app }: Props) {
                 forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'http') === 'https',
                 enabledTransports: ['ws', 'wss'],
                 authEndpoint: `/apps/${app.id}/broadcasting/auth`,
+                /*
                 auth: {
                     headers: {
                         'X-XSRF-TOKEN': decodeURIComponent(
@@ -53,6 +54,7 @@ export default function AppShow({ app }: Props) {
                         ),
                     },
                 },
+                */
                 Pusher,
             }),
         [app.id, app.key],

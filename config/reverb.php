@@ -69,7 +69,7 @@ return [
 
     'apps' => [
 
-        'provider' => 'database',
+        'provider' => 'config',
 
         'apps' => [
             [

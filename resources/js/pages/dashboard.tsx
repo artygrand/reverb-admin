@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react';
+import { useEchoPublic } from '@laravel/echo-react';
 import { Activity, Database, Layers, Server, Zap } from 'lucide-react';
 import type React from 'react';
 import { Badge } from '@/components/ui/badge';
@@ -38,6 +39,11 @@ function ServiceCard({ icon: Icon, title, description, ok }: {
 }
 
 export default function Dashboard({ health, stats }: Props) {
+
+    useEchoPublic('common', 'AppUpdated', (e) => {
+        console.log(e);
+    });
+
     return (
         <>
             <Head title="Health Check" />

@@ -16,17 +16,13 @@ class AppAddCommand extends Command
     {
         $name = $this->argument('name') ?: $this->ask('What is the application name?');
 
-        if (ReverbApp::where('name', $name)->exists()) {
-            $this->error("Application '$name' already exists.");
-
-            return self::FAILURE;
-        }
-
-        $app = ReverbApp::create([
-            'name'   => $name,
-            'key'    => Str::lower(Str::random(20)),
-            'secret' => Str::lower(Str::random(20)),
-        ]);
+        $app = ReverbApp::firstOrCreate(
+            ['name' => $name],
+            [
+                'key'    => Str::lower(Str::random(20)),
+                'secret' => Str::lower(Str::random(20)),
+            ],
+        );
 
         $this->line(json_encode([
             'name'   => $app->name,

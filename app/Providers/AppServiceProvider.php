@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Listeners\ReverbEventLogger;
 use App\Reverb\DatabaseApplicationProvider;
 use App\Reverb\DatabaseLogger;
+use App\Reverb\DBConfig;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->instance(Logger::class, new DatabaseLogger);
 
         $this->configureDefaults();
-        $this->registerReverbDatabaseDriver();
+        $this->registerReverbDatabase();
         $this->registerReverbEventListeners();
         $this->configurePulseAccess();
     }
@@ -61,12 +62,11 @@ class AppServiceProvider extends ServiceProvider
         );
     }
 
-    protected function registerReverbDatabaseDriver(): void
+    protected function registerReverbDatabase(): void
     {
-        // Use resolving() so the driver is registered when ApplicationManager is first created
-        $this->app->resolving(ApplicationManager::class, function (ApplicationManager $manager) {
-            $manager->extend('database', fn () => new DatabaseApplicationProvider);
-        });
+        config([
+            'reverb.apps.apps' => app(DBConfig::class)->merge(config('reverb.apps.apps', [])),
+        ]);
     }
 
     protected function registerReverbEventListeners(): void

@@ -26,7 +26,7 @@ class AppAddCommand extends Command
 
         $this->line(json_encode([
             'name'   => $app->name,
-            'app_id' => $app->id,
+            'id' => $app->id,
             'key'    => $app->key,
             'secret' => $app->secret,
         ], JSON_PRETTY_PRINT));

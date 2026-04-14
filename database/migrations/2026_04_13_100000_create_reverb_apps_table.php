@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('key')->unique();
             $table->string('secret');
-            $table->json('allowed_origins')->default('["*"]');
+            $table->json('allowed_origins')->nullable();
             $table->integer('ping_interval')->default(60);
             $table->integer('activity_timeout')->default(30);
             $table->integer('max_message_size')->default(10000);
@@ -23,9 +23,9 @@ return new class extends Migration
             $table->integer('rate_limit_max_attempts')->default(60);
             $table->integer('rate_limit_decay_seconds')->default(60);
             $table->boolean('rate_limit_terminate')->default(false);
-            $table->boolean('log_info')->default(true);
-            $table->boolean('log_errors')->default(true);
-            $table->boolean('log_messages')->default(true);
+            $table->boolean('log_info')->default(false);
+            $table->boolean('log_errors')->default(false);
+            $table->boolean('log_messages')->default(false);
             $table->timestamps();
         });
     }

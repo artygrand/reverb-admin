@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReverbApp extends Model
 {
+    protected $attributes = [
+        'allowed_origins' => '["*"]',
+    ];
+
     protected $fillable = [
         'name',
         'key',

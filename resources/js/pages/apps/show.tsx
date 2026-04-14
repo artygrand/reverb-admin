@@ -4,11 +4,6 @@ import { FileText, Ghost, Radio, Zap } from 'lucide-react';
 import Pusher from 'pusher-js';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type React from 'react';
-import AppInfoTab from './components/app-info-tab';
-import DebugControls from './components/debug-controls';
-import type { DebugEntry } from './components/debug-entry';
-import EventCreatorCard from './components/event-creator-card';
-import EventLogEntry from './components/event-log-entry';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
@@ -16,6 +11,11 @@ import { dashboard } from '@/routes';
 import apps from '@/routes/applications';
 import broadcasting from '@/routes/applications/broadcasting';
 import type { ReverbAppDetail } from '@/types';
+import AppInfoTab from './components/app-info-tab';
+import DebugControls from './components/debug-controls';
+import type { DebugEntry } from './components/debug-entry';
+import EventCreatorCard from './components/event-creator-card';
+import EventLogEntry from './components/event-log-entry';
 
 
 interface Props {

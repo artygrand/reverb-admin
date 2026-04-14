@@ -1,6 +1,6 @@
-import type { ReverbLog } from '@/types';
 import { AlertCircle, FileText, Info, MessageSquare } from 'lucide-react';
 import type React from 'react';
+import type { ReverbLog } from '@/types';
 
 const TYPE_COLORS: Record<string, string> = {
     info: 'text-blue-600 dark:text-blue-400',

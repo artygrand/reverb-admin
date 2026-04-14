@@ -9,7 +9,7 @@ import ToggleSwitch from '@/components/ui/toggle-switch';
 import AppLayout from '@/layouts/app-layout';
 import LogTable from '@/pages/apps/components/log-table';
 import { dashboard } from '@/routes';
-import apps from '@/routes/apps';
+import apps from '@/routes/applications';
 import type { ReverbLog } from '@/types';
 
 interface AppLogSettings {

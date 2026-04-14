@@ -13,7 +13,8 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
-import apps from '@/routes/apps';
+import apps from '@/routes/applications';
+import broadcasting from '@/routes/applications/broadcasting';
 import type { ReverbAppDetail } from '@/types';
 
 
@@ -45,7 +46,7 @@ export default function AppShow({ app }: Props) {
                 wssPort: Number(import.meta.env.VITE_REVERB_PORT ?? 8080),
                 forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'http') === 'https',
                 enabledTransports: ['ws', 'wss'],
-                authEndpoint: `/apps/${app.id}/broadcasting/auth`,
+                authEndpoint: broadcasting.auth(app.id).url,
                 /*
                 auth: {
                     headers: {

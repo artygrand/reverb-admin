@@ -48,7 +48,7 @@ ReverbEventLogger::handleMessageReceived()
   └→ new Pusher(app->key, app->secret, ..., reverb options)
        →  triggers 'private-reverb-admin-debug.{app_id}' / 'debug.event'
             ↓  (in that app's Reverb namespace)
-            Frontend per-app Echo (key=app.key, authEndpoint=/apps/{id}/broadcasting/auth)
+            Frontend per-app Echo (key=app.key, authEndpoint=/applications/{id}/broadcasting/auth)
               .private('reverb-admin-debug.{app.id}').listen('.debug.event', handleEvent)
                 ↓
                 React component state update → UI re-render
@@ -170,7 +170,7 @@ The project uses environment-based config for Reverb. Key files:
 ### Real-Time Communication
 
 - **Laravel Echo (global)**: Configured with `configureEcho({ broadcaster: 'reverb' })` in `app.tsx` — `@laravel/echo-react` auto-fills `VITE_REVERB_*` env vars as defaults
-- **Per-app Echo (debug console)**: `apps/show.tsx` creates a dedicated `new Echo({ key: app.key, ... })` instance for each selected app, using `authEndpoint: /apps/{id}/broadcasting/auth`
+- **Per-app Echo (debug console)**: `apps/show.tsx` creates a dedicated `new Echo({ key: app.key, ... })` instance for each selected app, using `authEndpoint: /applications/{id}/broadcasting/auth`
 - **Custom channel auth**: `AppBroadcastAuthController` signs private-channel auth tokens with the selected app's secret (HMAC-SHA256), allowing the admin to subscribe to any channel on any app
 - **Direct Pusher broadcasting**: `ReverbEventLogger` and `AppDebugController` use `new Pusher(app->key, app->secret, ...)` with `config('broadcasting.connections.reverb.options')` — never hardcode `127.0.0.1`
 
@@ -339,7 +339,7 @@ Call the method with arguments first, then access `.url` property.
 
 Import parent objects, not individual URLs with aliases
 ```
-import apps from '@/routes/apps';
+import apps from '@/routes/applications';
 ```
 
 Never Use Hardcoded URLs

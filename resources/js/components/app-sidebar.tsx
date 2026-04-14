@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/sidebar';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { dashboard, pulse } from '@/routes';
-import apps from '@/routes/apps';
+import apps from '@/routes/applications';
 import type { NavItem, ReverbAppSummary, SharedProps } from '@/types';
 
 const mainNavItems: NavItem[] = [
